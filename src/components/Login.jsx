@@ -1,16 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { TbCircleLetterCFilled } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .required("Email is a required field")
+    .required("Email is a required")
     .email("Invalid email format"),
   password: Yup.string()
-    .required("Password is a required field")
+    .required("Password is a required")
     .min(8, "Password must be at least 8 characters"),
 });
 
@@ -40,19 +41,30 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="min-h-[40rem] flex flex-col items-center justify-center py-6 px-4 w-[80rem] shadow-2xl shadow-[#460874] bg-[#450874c2]">
-        <div className="grid md:grid-cols-2 items-center gap-10 max-w-6xl max-md:max-w-md w-full">
-          <div>
-            <h1 className="lg:text-5xl text-3xl font-bold lg:leading-[57px] text-white">
-              Cosmo House
+    <div className="flex items-center justify-center min-h-screen bg-white px-4">
+      <div className="w-full max-w-7xl h-[80vh] bg-white rounded-xl shadow-2xl shadow-[#450874c2] overflow-hidden flex justify-center relative">
+        <div className="absolute top-8 left-4 flex flex-row">
+          <span className="text-4xl mr-4 text-[#450874c2]">
+            <TbCircleLetterCFilled />
+          </span>
+          <h1 className="text-[#450874c2] text-2xl font-bold">COSMOS HOUSE</h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-6 sm:p-10">
+          <div className="text-center md:text-left">
+            <h1 className="text-4xl sm:text-5xl font-bold text-black leading-tight">
+              Cosmos House
             </h1>
-            <p className="text-sm mt-6 text-white leading-relaxed">
+            <p className="text-black mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed">
+              Home appliances, kitchenware, crockery and modular kitchens <br />
               Sign in to your account to access your profile, history, and any
               private pages you've been granted access to.
             </p>
+            <h3>
+              Palladium Street, Lalchowk, Srinagar- 190001, J&K, 190001, India
+            </h3>
+            <h3>0091 - 94190 09163; cosmos_house@hotmail.com</h3>
+            <h3>Copyright © 2018 COSMOS HOUSE - All Rights Reserved.</h3>
           </div>
-
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={schema}
@@ -66,102 +78,105 @@ const Login = () => {
               touched,
               isSubmitting,
             }) => (
-              <form
-                className="max-w-md md:ml-auto w-full"
-                onSubmit={handleSubmit}
-              >
-                <h3 className="text-white lg:text-3xl text-2xl font-bold mb-8">
+              <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
+                <h3 className="text-black text-2xl sm:text-3xl font-bold mb-8 text-center md:text-left">
                   Sign in
                 </h3>
 
-                <div className="space-y-6">
+                <div className="space-y-4">
                   <div>
-                    <label className="text-sm text-white font-medium mb-2 block">
+                    <label className="block text-sm font-medium text-black mb-2">
                       Email
                     </label>
                     <input
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="bg-slate-100 w-full text-sm text-black px-4 py-3 rounded-md outline-none border focus:border-blue-600 focus:border-2"
+                      className="w-full px-4 py-3 text-sm text-black rounded-md bg-slate-100 border focus:border-[#450874c2] outline-none"
                       placeholder="Email"
                       value={values.email}
                       onChange={handleChange}
                     />
-                    {errors.email && touched.email && (
-                      <p className="text-red-400 text-sm mt-1">
-                        {errors.email}
-                      </p>
-                    )}
+                    <p
+                      className={`text-sm min-h-[1rem] ${
+                        errors.email && touched.email
+                          ? "text-red-400"
+                          : "invisible"
+                      }`}
+                    >
+                      {errors.email && touched.email
+                        ? errors.email
+                        : "placeholder"}
+                    </p>
                   </div>
 
                   <div>
-                    <label className="text-sm text-white font-medium mb-2 block">
+                    <label className="block text-sm font-medium text-black mb-2">
                       Password
                     </label>
-                    <div className="relative flex items-center">
+                    <div className="relative">
                       <input
                         name="password"
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
-                        className="bg-slate-100 w-full text-sm text-black px-4 py-3 rounded-md outline-none border focus:border-blue-600 focus:border-2"
+                        className="w-full px-4 py-3 text-sm text-black rounded-md bg-slate-100 border focus:border-[#450874c2] outline-none"
                         placeholder="Password"
                         value={values.password}
                         onChange={handleChange}
                       />
                       <button
-                        onClick={handleShowPassword}
-                        className="absolute right-2"
                         type="button"
+                        onClick={handleShowPassword}
+                        className="absolute right-3 top-3 text-gray-600"
                       >
-                        {showPassword ? (
-                          <FiEye className="text-gray-600" />
-                        ) : (
-                          <FiEyeOff className="text-gray-600" />
-                        )}
+                        {showPassword ? <FiEye /> : <FiEyeOff />}
                       </button>
                     </div>
-                    {errors.password && touched.password && (
-                      <p className="text-red-400 text-sm mt-1">
-                        {errors.password}
-                      </p>
-                    )}
+                    <p
+                      className={`text-sm min-h-[1.25rem] ${
+                        errors.password && touched.password
+                          ? "text-red-400"
+                          : "invisible"
+                      }`}
+                    >
+                      {errors.password && touched.password
+                        ? errors.password
+                        : "placeholder"}
+                    </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center">
                       <input
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
-                        className="h-4 w-4 text-white focus:ring-blue-300 border-slate-300 rounded cursor-pointer"
+                        className="w-4 h-4 text-black border-gray-300 rounded focus:ring-[#450874c2]"
                       />
                       <label
                         htmlFor="remember-me"
-                        className="ml-3 block text-sm text-white"
+                        className="ml-2 text-sm text-black"
                       >
                         Remember me
                       </label>
                     </div>
-                    <div className="text-sm">
-                      <Link
-                        to="/forgot-password"
-                        className="text-white hover:text-blue-500 font-medium"
-                      >
-                        Forgot your password?
-                      </Link>
-                    </div>
+                    <Link
+                      to="/forgot-password"
+                      className="text-sm text-black hover:text-[#450874c2] font-medium"
+                    >
+                      Forgot your password?
+                    </Link>
                   </div>
-                </div>
 
-                <div className="!mt-12">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
-                  >
-                    {isSubmitting ? "Logging in..." : "Log in"}
-                  </button>
+                  <div className="pt-6">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-3 px-4 text-sm font-semibold rounded bg-blue-600 text-white hover:bg-[#450874c2] focus:outline-none transition duration-200"
+                    >
+                      {isSubmitting ? "Logging in..." : "Log in"}
+                    </button>
+                  </div>
                 </div>
               </form>
             )}
