@@ -32,6 +32,7 @@ const Login = () => {
         { headers: { "Content-Type": "application/json" } }
       );
       console.log("Login success:", response.data);
+      localStorage.setItem("token", response.data.token);
       navigateTo("/dashboard");
     } catch (error) {
       console.log(`Error occurred while logging in: ${error.message}`);
