@@ -7,22 +7,46 @@ import {
   MdTableChart,
   MdDashboard,
 } from "react-icons/md";
-// import axios from "axios"; // keep commented out if you're not testing with backend yet
+// import axios from "axios";
 
 const BrandContextProvider = ({ children }) => {
   const [brands, setBrands] = useState([]);
 
   const fetchBrands = async () => {
     try {
-      // Fake data for local testing (replace with real API call later)
       const demoBrands = [
-        { icon: <MdOutlineDashboard size={20} />, name: "Dashboard" },
-        { icon: <MdInsertChart size={20} />, name: "Hawkins" },
-        { icon: <MdInsertChart size={20} />, name: "Sunflame" },
-        { icon: <MdOutlineCalendarToday size={20} />, name: "Hettich" },
-        { icon: <MdTableChart size={20} />, name: "Panasonic" },
-        { icon: <MdDashboard size={20} />, name: "Settings" },
+        {
+          icon: <MdOutlineDashboard size={20} />,
+          name: "Dashboard",
+          date: "2025-04-25",
+        },
+        {
+          icon: <MdInsertChart size={20} />,
+          name: "Hawkins",
+          date: "2025-04-24",
+        },
+        {
+          icon: <MdInsertChart size={20} />,
+          name: "Sunflame",
+          date: "2025-04-24",
+        },
+        {
+          icon: <MdOutlineCalendarToday size={20} />,
+          name: "Hettich",
+          date: "2025-04-23",
+        },
+        {
+          icon: <MdTableChart size={20} />,
+          name: "Panasonic",
+          date: "2025-04-22",
+        },
+        {
+          icon: <MdDashboard size={20} />,
+          name: "Settings",
+          date: "2025-04-21",
+        },
       ];
+
       setBrands(demoBrands);
     } catch (error) {
       console.log(`Failed to fetch brands: ${error}`);
@@ -32,7 +56,7 @@ const BrandContextProvider = ({ children }) => {
   const addBrand = async (brandName, icon) => {
     try {
       // await axios.post(`${url}`, { name: brandName });
-      setBrands((prev) => [...prev, { name: brandName, icon }]); // mock add
+      // setBrands((prev) => [...prev, { name: brandName, icon }]);
     } catch (error) {
       console.log("Failed to add brand:", error);
     }
